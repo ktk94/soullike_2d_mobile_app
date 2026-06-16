@@ -1,0 +1,390 @@
+{
+  "playerLevelCurve": {
+    "maxLevel": 50,
+    "expFormula": "level * level * 50",
+    "statGrowthPerLevel": {
+      "hp": 8,
+      "attack": 2,
+      "defense": 1,
+      "speed": 0.0,
+      "critRate": 0.002,
+      "critDamage": 0.01
+    },
+    "levelTable": [
+      { "level": 1,  "expRequired": 50,    "totalHp": 100, "totalAtk": 10, "totalDef": 5,  "critRate": 0.05, "critDmg": 1.50 },
+      { "level": 2,  "expRequired": 200,   "totalHp": 108, "totalAtk": 12, "totalDef": 6,  "critRate": 0.052,"critDmg": 1.51 },
+      { "level": 3,  "expRequired": 450,   "totalHp": 116, "totalAtk": 14, "totalDef": 7,  "critRate": 0.054,"critDmg": 1.52 },
+      { "level": 5,  "expRequired": 1250,  "totalHp": 132, "totalAtk": 18, "totalDef": 9,  "critRate": 0.058,"critDmg": 1.54 },
+      { "level": 10, "expRequired": 5000,  "totalHp": 172, "totalAtk": 28, "totalDef": 14, "critRate": 0.068,"critDmg": 1.59 },
+      { "level": 15, "expRequired": 11250, "totalHp": 212, "totalAtk": 38, "totalDef": 19, "critRate": 0.078,"critDmg": 1.64 },
+      { "level": 20, "expRequired": 20000, "totalHp": 252, "totalAtk": 48, "totalDef": 24, "critRate": 0.088,"critDmg": 1.69 },
+      { "level": 25, "expRequired": 31250, "totalHp": 292, "totalAtk": 58, "totalDef": 29, "critRate": 0.098,"critDmg": 1.74 },
+      { "level": 30, "expRequired": 45000, "totalHp": 332, "totalAtk": 68, "totalDef": 34, "critRate": 0.108,"critDmg": 1.79 },
+      { "level": 35, "expRequired": 61250, "totalHp": 372, "totalAtk": 78, "totalDef": 39, "critRate": 0.118,"critDmg": 1.84 },
+      { "level": 40, "expRequired": 80000, "totalHp": 412, "totalAtk": 88, "totalDef": 44, "critRate": 0.128,"critDmg": 1.89 },
+      { "level": 45, "expRequired": 101250,"totalHp": 452, "totalAtk": 98, "totalDef": 49, "critRate": 0.138,"critDmg": 1.94 },
+      { "level": 50, "expRequired": 125000,"totalHp": 492, "totalAtk": 108,"totalDef": 54, "critRate": 0.148,"critDmg": 1.99 }
+    ]
+  },
+
+  "enemies": {
+    "forgottenForest": [
+      {
+        "id": "enemy_slime",
+        "name": "슬라임",
+        "hp": 60,
+        "attack": 8,
+        "defense": 2,
+        "speed": 1.5,
+        "element": "Physical",
+        "expReward": 15,
+        "goldReward": 5,
+        "staggerThreshold": 30
+      },
+      {
+        "id": "enemy_mushroom",
+        "name": "버섯",
+        "hp": 45,
+        "attack": 12,
+        "defense": 1,
+        "speed": 1.0,
+        "element": "Physical",
+        "expReward": 18,
+        "goldReward": 7,
+        "staggerThreshold": 20
+      },
+      {
+        "id": "enemy_wolf",
+        "name": "늑대",
+        "hp": 80,
+        "attack": 15,
+        "defense": 3,
+        "speed": 3.5,
+        "element": "Physical",
+        "expReward": 25,
+        "goldReward": 10,
+        "staggerThreshold": 40
+      },
+      {
+        "id": "enemy_treant",
+        "name": "트렌트",
+        "hp": 120,
+        "attack": 10,
+        "defense": 8,
+        "speed": 0.8,
+        "element": "Physical",
+        "expReward": 35,
+        "goldReward": 15,
+        "staggerThreshold": 60
+      }
+    ],
+    "redMine": [
+      {
+        "id": "enemy_flame_bat",
+        "name": "화염 박쥐",
+        "hp": 50,
+        "attack": 18,
+        "defense": 2,
+        "speed": 4.0,
+        "element": "Fire",
+        "expReward": 30,
+        "goldReward": 12,
+        "staggerThreshold": 25
+      },
+      {
+        "id": "enemy_magma_slime",
+        "name": "마그마 슬라임",
+        "hp": 90,
+        "attack": 20,
+        "defense": 5,
+        "speed": 1.2,
+        "element": "Fire",
+        "expReward": 40,
+        "goldReward": 18,
+        "staggerThreshold": 45
+      },
+      {
+        "id": "enemy_dwarf",
+        "name": "드워프",
+        "hp": 150,
+        "attack": 16,
+        "defense": 12,
+        "speed": 1.8,
+        "element": "Physical",
+        "expReward": 55,
+        "goldReward": 25,
+        "staggerThreshold": 75
+      },
+      {
+        "id": "enemy_flame_elemental",
+        "name": "화염 정령",
+        "hp": 70,
+        "attack": 25,
+        "defense": 3,
+        "speed": 2.5,
+        "element": "Fire",
+        "expReward": 50,
+        "goldReward": 22,
+        "staggerThreshold": 35
+      }
+    ],
+    "frozenCitadel": [
+      {
+        "id": "enemy_ice_golem",
+        "name": "얼음 골렘",
+        "hp": 200,
+        "attack": 22,
+        "defense": 18,
+        "speed": 1.0,
+        "element": "Ice",
+        "expReward": 80,
+        "goldReward": 35,
+        "staggerThreshold": 100
+      },
+      {
+        "id": "enemy_frost_wizard",
+        "name": "프로스트 위즈",
+        "hp": 80,
+        "attack": 30,
+        "defense": 5,
+        "speed": 2.0,
+        "element": "Ice",
+        "expReward": 75,
+        "goldReward": 32,
+        "staggerThreshold": 40
+      },
+      {
+        "id": "enemy_snowman",
+        "name": "눈사람",
+        "hp": 100,
+        "attack": 18,
+        "defense": 10,
+        "speed": 1.5,
+        "element": "Ice",
+        "expReward": 60,
+        "goldReward": 28,
+        "staggerThreshold": 50
+      }
+    ],
+    "thunderSpire": [
+      {
+        "id": "enemy_electric_orb",
+        "name": "전기 구체",
+        "hp": 60,
+        "attack": 35,
+        "defense": 2,
+        "speed": 3.0,
+        "element": "Lightning",
+        "expReward": 90,
+        "goldReward": 40,
+        "staggerThreshold": 30
+      },
+      {
+        "id": "enemy_storm_elemental",
+        "name": "폭풍 원소",
+        "hp": 120,
+        "attack": 28,
+        "defense": 8,
+        "speed": 2.5,
+        "element": "Lightning",
+        "expReward": 100,
+        "goldReward": 45,
+        "staggerThreshold": 60
+      },
+      {
+        "id": "enemy_gargoyle",
+        "name": "가고일",
+        "hp": 180,
+        "attack": 32,
+        "defense": 15,
+        "speed": 2.0,
+        "element": "Physical",
+        "expReward": 120,
+        "goldReward": 55,
+        "staggerThreshold": 90
+      }
+    ],
+    "abyss": [
+      {
+        "id": "enemy_shadow",
+        "name": "그림자",
+        "hp": 150,
+        "attack": 40,
+        "defense": 5,
+        "speed": 3.5,
+        "element": "Dark",
+        "expReward": 150,
+        "goldReward": 65,
+        "staggerThreshold": 75
+      },
+      {
+        "id": "enemy_fallen_knight",
+        "name": "타락한 기사",
+        "hp": 250,
+        "attack": 35,
+        "defense": 20,
+        "speed": 2.0,
+        "element": "Dark",
+        "expReward": 200,
+        "goldReward": 85,
+        "staggerThreshold": 125
+      }
+    ]
+  },
+
+  "bosses": [
+    {
+      "id": "boss_elder_grove",
+      "name": "엘더 그로브",
+      "stage": "forgottenForest",
+      "recommendedLevel": 5,
+      "hp": 2000,
+      "attack": 25,
+      "defense": 10,
+      "speed": 1.5,
+      "element": "Physical",
+      "phases": [
+        { "hpThresholdPercent": 100, "description": "기본 패턴: 뿌리 휘두르기, 씨앗 투척" },
+        { "hpThresholdPercent": 60,  "description": "가시 덩굴 소환, 돌진 속도 증가" },
+        { "hpThresholdPercent": 30,  "description": "분노: 전방위 가시 폭발, 소환수 2체 등장" }
+      ],
+      "staggerThreshold": 200,
+      "expReward": 500,
+      "goldReward": 200,
+      "dropTable": "boss_elder_grove_loot"
+    },
+    {
+      "id": "boss_ignis",
+      "name": "이그니스",
+      "stage": "redMine",
+      "recommendedLevel": 12,
+      "hp": 3500,
+      "attack": 40,
+      "defense": 15,
+      "speed": 2.0,
+      "element": "Fire",
+      "phases": [
+        { "hpThresholdPercent": 100, "description": "화염구 투척, 근접 할퀴기" },
+        { "hpThresholdPercent": 70,  "description": "바닥 용암 장판, 돌진 공격 추가" },
+        { "hpThresholdPercent": 40,  "description": "화염 폭풍, 분신 소환" },
+        { "hpThresholdPercent": 15,  "description": "분노: 전신 화염 방어막, 연속 돌진" }
+      ],
+      "staggerThreshold": 300,
+      "expReward": 1200,
+      "goldReward": 500,
+      "dropTable": "boss_ignis_loot"
+    },
+    {
+      "id": "boss_glacia",
+      "name": "글라시아",
+      "stage": "frozenCitadel",
+      "recommendedLevel": 20,
+      "hp": 4500,
+      "attack": 50,
+      "defense": 25,
+      "speed": 1.8,
+      "element": "Ice",
+      "phases": [
+        { "hpThresholdPercent": 100, "description": "빙결 화살 연사, 얼음 벽 생성" },
+        { "hpThresholdPercent": 65,  "description": "빙결 장판 확장, 돌진 공격" },
+        { "hpThresholdPercent": 30,  "description": "분노: 절대영도 전방위 공격, 빙결 상태이상" }
+      ],
+      "staggerThreshold": 400,
+      "expReward": 2000,
+      "goldReward": 800,
+      "dropTable": "boss_glacia_loot"
+    },
+    {
+      "id": "boss_voltar",
+      "name": "볼타르",
+      "stage": "thunderSpire",
+      "recommendedLevel": 28,
+      "hp": 6000,
+      "attack": 65,
+      "defense": 20,
+      "speed": 3.0,
+      "element": "Lightning",
+      "phases": [
+        { "hpThresholdPercent": 100, "description": "번개 낙뢰 패턴, 전기장 설치" },
+        { "hpThresholdPercent": 70,  "description": "연쇄 번개, 순간이동 공격" },
+        { "hpThresholdPercent": 40,  "description": "전기 분신 3체, 동시 공격" },
+        { "hpThresholdPercent": 15,  "description": "분노: 전역 낙뢰, 회피 필수 구간" }
+      ],
+      "staggerThreshold": 500,
+      "expReward": 3500,
+      "goldReward": 1500,
+      "dropTable": "boss_voltar_loot"
+    },
+    {
+      "id": "boss_malrok",
+      "name": "말로크",
+      "stage": "abyss",
+      "recommendedLevel": 38,
+      "hp": 10000,
+      "attack": 80,
+      "defense": 35,
+      "speed": 2.5,
+      "element": "Dark",
+      "phases": [
+        { "hpThresholdPercent": 100, "description": "어둠 투사체, 근접 대검 휘두르기" },
+        { "hpThresholdPercent": 75,  "description": "그림자 소환, 흡입 폭발" },
+        { "hpThresholdPercent": 50,  "description": "2차 변신: 공격 패턴 전환, 순간이동" },
+        { "hpThresholdPercent": 25,  "description": "어둠 장판 확산, 분신 공격" },
+        { "hpThresholdPercent": 10,  "description": "최종 분노: 전방위 어둠 폭발, 즉사기 패턴" }
+      ],
+      "staggerThreshold": 800,
+      "expReward": 8000,
+      "goldReward": 5000,
+      "dropTable": "boss_malrok_loot"
+    }
+  ],
+
+  "itemDropRates": {
+    "normal": {
+      "Common": 0.60,
+      "Uncommon": 0.25,
+      "Rare": 0.12,
+      "Epic": 0.025,
+      "Legendary": 0.005
+    },
+    "boss": {
+      "Common": 0.0,
+      "Uncommon": 0.0,
+      "Rare": 0.40,
+      "Epic": 0.35,
+      "Legendary": 0.25
+    }
+  },
+
+  "enhancementSuccessRates": [
+    { "level": 1,  "successRate": 0.95, "bonusPerLevel": 0.05, "failPenalty": "none" },
+    { "level": 2,  "successRate": 0.90, "bonusPerLevel": 0.05, "failPenalty": "none" },
+    { "level": 3,  "successRate": 0.80, "bonusPerLevel": 0.06, "failPenalty": "none" },
+    { "level": 4,  "successRate": 0.65, "bonusPerLevel": 0.07, "failPenalty": "none" },
+    { "level": 5,  "successRate": 0.50, "bonusPerLevel": 0.08, "failPenalty": "levelDown" },
+    { "level": 6,  "successRate": 0.35, "bonusPerLevel": 0.09, "failPenalty": "levelDown" },
+    { "level": 7,  "successRate": 0.25, "bonusPerLevel": 0.10, "failPenalty": "levelDown" },
+    { "level": 8,  "successRate": 0.15, "bonusPerLevel": 0.12, "failPenalty": "levelDown" },
+    { "level": 9,  "successRate": 0.10, "bonusPerLevel": 0.14, "failPenalty": "destroy" },
+    { "level": 10, "successRate": 0.05, "bonusPerLevel": 0.16, "failPenalty": "destroy" }
+  ],
+
+  "damageFormula": {
+    "description": "최종데미지 = (ATK * skillMultiplier - DEF * 0.5) * elementBonus * critMultiplier * comboBonus",
+    "minimumDamage": 1,
+    "criticalBase": 1.5,
+    "elementStrongMultiplier": 1.5,
+    "elementWeakMultiplier": 0.5,
+    "elementCounterMultiplier": 2.0,
+    "defenseFormula": "actual = raw * (100 / (100 + defense))"
+  },
+
+  "difficultyScaling": {
+    "description": "스테이지 깊이에 따른 적 스탯 스케일링",
+    "perFloorHpMultiplier": 1.08,
+    "perFloorAtkMultiplier": 1.05,
+    "perFloorDefMultiplier": 1.03,
+    "perFloorExpMultiplier": 1.10,
+    "perFloorGoldMultiplier": 1.12
+  }
+}

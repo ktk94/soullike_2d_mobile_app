@@ -56,6 +56,7 @@ namespace SoulCraft.Core
         public string[] unlockedSkillIds = new string[0];
         public string[] inventoryItemJson = new string[0];
         public string[] equippedItemJson = new string[0];
+        public bool tutorialCompleted;
         public PlayerStatsSave stats = new PlayerStatsSave();
     }
 

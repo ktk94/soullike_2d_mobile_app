@@ -7,7 +7,8 @@ namespace SoulCraft.Combat
     {
         Melee,
         Ranged,
-        AoE
+        AoE,
+        Buff
     }
 
     [CreateAssetMenu(fileName = "NewSkill", menuName = "SoulCraft/Skill Data")]
@@ -26,6 +27,10 @@ namespace SoulCraft.Combat
         public int manaCost;
         public float range = 1.5f;
         public float aoeRadius;
+
+        [Header("Duration / Buff")]
+        [Tooltip("버프/장판 등 지속 시간 (초)")]
+        public float duration;
 
         [Header("Type")]
         public DamageType element = DamageType.Physical;
