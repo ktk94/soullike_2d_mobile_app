@@ -273,10 +273,11 @@ namespace SoulCraft.Player
 
         private void PerformHitDetection(ComboStep data)
         {
-            Vector2 facing = _controller.FacingDirection;
+            Vector2 facing = _controller != null ? _controller.FacingDirection : Vector2.right;
             Vector2 origin = (Vector2)transform.position + facing * data.hitOffset;
 
-            Collider2D[] hits = Physics2D.OverlapCircleAll(origin, data.hitRadius, _enemyLayer);
+            // LayerMask 없이 전체 검색 후 EnemyBase로 필터링
+            Collider2D[] hits = Physics2D.OverlapCircleAll(origin, data.hitRadius);
 
             bool anyHit = false;
 
@@ -284,14 +285,15 @@ namespace SoulCraft.Player
             {
                 if (hit.gameObject == gameObject) continue;
 
+                // EnemyBase가 있는 오브젝트만 타격
+                var enemyBase = hit.GetComponent<SoulCraft.Enemy.EnemyBase>();
+                if (enemyBase == null) continue;
+                if (enemyBase.IsDead) continue;
+
                 int rawDamage = CalculateDamage(data.damageMultiplier, out bool isCritical);
 
-                // IDamageable이 있으면 사용, 없으면 DamageEvent만 발행
-                var damageable = hit.GetComponent<IDamageable>();
-                if (damageable != null)
-                {
-                    damageable.TakeDamage(rawDamage, DamageType.Physical);
-                }
+                // EnemyBase에 직접 데미지 적용
+                enemyBase.TakeDamage(rawDamage, (Vector2)transform.position);
 
                 // 이벤트 발행
                 GameEventSystem.Publish(new DamageEvent
@@ -303,6 +305,11 @@ namespace SoulCraft.Player
                     Type = DamageType.Physical,
                     HitPoint = hit.ClosestPoint(origin)
                 });
+
+                // 히트 스파크 이펙트
+                var visualizer = GetComponent<SoulCraft.Combat.AttackVisualizer>();
+                if (visualizer != null)
+                    visualizer.ShowHitSpark(hit.ClosestPoint(origin));
 
                 anyHit = true;
             }

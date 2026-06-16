@@ -28,25 +28,77 @@ namespace SoulCraft.Factory
         // ================================================================
 
         private static Sprite _whiteSquare;
+        private static Sprite _floorTileA;
+        private static Sprite _floorTileB;
+        private static Sprite _wallTile;
 
-        /// <summary>
-        /// 1x1 흰색 스프라이트를 가져오거나 생성한다.
-        /// </summary>
         private static Sprite GetWhiteSquare()
         {
             if (_whiteSquare != null) return _whiteSquare;
-
             var tex = new Texture2D(4, 4, TextureFormat.RGBA32, false);
             tex.filterMode = FilterMode.Point;
-            var pixels = new Color[16];
-            for (int i = 0; i < 16; i++) pixels[i] = Color.white;
-            tex.SetPixels(pixels);
+            for (int i = 0; i < 16; i++) tex.SetPixel(i % 4, i / 4, Color.white);
             tex.Apply();
-
             _whiteSquare = Sprite.Create(tex, new Rect(0, 0, 4, 4), new Vector2(0.5f, 0.5f), 4f);
-            _whiteSquare.name = "WhiteSquare";
-
             return _whiteSquare;
+        }
+
+        private static Sprite GetFloorTile(bool variant)
+        {
+            if (variant && _floorTileB != null) return _floorTileB;
+            if (!variant && _floorTileA != null) return _floorTileA;
+
+            int s = 16;
+            var tex = new Texture2D(s, s, TextureFormat.RGBA32, false);
+            tex.filterMode = FilterMode.Point;
+            var rand = new System.Random(variant ? 42 : 7);
+
+            Color baseCol = variant ? new Color(0.22f, 0.20f, 0.18f) : new Color(0.18f, 0.16f, 0.14f);
+            for (int y = 0; y < s; y++)
+                for (int x = 0; x < s; x++)
+                {
+                    float noise = (float)(rand.NextDouble() * 0.06 - 0.03);
+                    Color c = new Color(baseCol.r + noise, baseCol.g + noise, baseCol.b + noise, 1f);
+                    // 가장자리에 약간 어두운 선 (타일 경계)
+                    if (x == 0 || y == 0) c *= 0.85f;
+                    // 랜덤 돌 무늬
+                    if (rand.NextDouble() < 0.04f) c *= 0.75f;
+                    // 중앙에 미세한 균열
+                    if ((x == 7 || x == 8) && y > 3 && y < 12 && rand.NextDouble() < 0.3f) c *= 0.8f;
+                    tex.SetPixel(x, y, c);
+                }
+            tex.Apply();
+            var sp = Sprite.Create(tex, new Rect(0, 0, s, s), new Vector2(0.5f, 0.5f), s);
+            if (variant) _floorTileB = sp; else _floorTileA = sp;
+            return sp;
+        }
+
+        private static Sprite GetWallTile()
+        {
+            if (_wallTile != null) return _wallTile;
+            int s = 16;
+            var tex = new Texture2D(s, s, TextureFormat.RGBA32, false);
+            tex.filterMode = FilterMode.Point;
+            var rand = new System.Random(99);
+
+            for (int y = 0; y < s; y++)
+                for (int x = 0; x < s; x++)
+                {
+                    float noise = (float)(rand.NextDouble() * 0.04 - 0.02);
+                    Color c;
+                    // 벽돌 패턴
+                    bool isMortar = (y % 8 == 0) || ((y / 8 % 2 == 0 ? x % 8 : (x + 4) % 8) == 0);
+                    if (isMortar)
+                        c = new Color(0.25f + noise, 0.22f + noise, 0.18f + noise, 1f);
+                    else
+                        c = new Color(0.40f + noise, 0.34f + noise, 0.28f + noise, 1f);
+                    // 상단 밝게 (3D 느낌)
+                    if (y >= s - 2) c *= 1.2f;
+                    tex.SetPixel(x, y, c);
+                }
+            tex.Apply();
+            _wallTile = Sprite.Create(tex, new Rect(0, 0, s, s), new Vector2(0.5f, 0.5f), s);
+            return _wallTile;
         }
 
         // ================================================================
@@ -215,8 +267,6 @@ namespace SoulCraft.Factory
         private static void LayFloorTiles(Transform parent, int width, int height,
             float offsetX, float offsetY)
         {
-            Sprite sprite = GetWhiteSquare();
-
             for (int x = 0; x < width; x++)
             {
                 for (int y = 0; y < height; y++)
@@ -226,8 +276,8 @@ namespace SoulCraft.Factory
                     tileGo.transform.localPosition = new Vector3(offsetX + x, offsetY + y, 0.1f);
 
                     var sr = tileGo.AddComponent<SpriteRenderer>();
-                    sr.sprite = sprite;
-                    sr.color = (x + y) % 2 == 0 ? ColFloor1 : ColFloor2;
+                    sr.sprite = GetFloorTile((x + y) % 2 == 0);
+                    sr.color = Color.white;
                     sr.sortingOrder = -10;
                 }
             }
@@ -262,8 +312,8 @@ namespace SoulCraft.Factory
                     wallGo.layer = LayerMask.NameToLayer("Default");
 
                     var sr = wallGo.AddComponent<SpriteRenderer>();
-                    sr.sprite = sprite;
-                    sr.color = (y == height) ? ColWallTop : ColWall;
+                    sr.sprite = GetWallTile();
+                    sr.color = (y == height) ? new Color(1.2f, 1.1f, 1.0f) : Color.white;
                     sr.sortingOrder = (y == height) ? 5 : 0;
 
                     var col = wallGo.AddComponent<BoxCollider2D>();
@@ -434,7 +484,7 @@ namespace SoulCraft.Factory
         {
             var go = new GameObject($"Enemy_{enemyType}");
             go.transform.position = (Vector3)position;
-            go.tag = "Enemy";
+            try { go.tag = "Enemy"; } catch { /* tag not defined */ }
             go.layer = LayerMask.NameToLayer("Enemy") >= 0 ? LayerMask.NameToLayer("Enemy") : 0;
 
             var sr = go.AddComponent<SpriteRenderer>();
@@ -485,7 +535,7 @@ namespace SoulCraft.Factory
         {
             var go = new GameObject("Boss_Placeholder");
             go.transform.position = (Vector3)position;
-            go.tag = "Enemy";
+            try { go.tag = "Enemy"; } catch { /* tag not defined */ }
             go.layer = LayerMask.NameToLayer("Enemy") >= 0 ? LayerMask.NameToLayer("Enemy") : 0;
 
             var sr = go.AddComponent<SpriteRenderer>();
