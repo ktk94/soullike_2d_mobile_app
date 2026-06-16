@@ -567,6 +567,9 @@ namespace SoulCraft.Factory
                         enemyBase = enemyGo.AddComponent<EnemyBase>();
                     SetPrivateField(enemyBase, "data", enemyData);
 
+                    // 몬스터 다양화 (roomIndex 전달)
+                    MonsterVariety.ApplyVariety(enemyGo, type2, roomIndex);
+
                     enemies.Add(enemyGo);
                 }
             }

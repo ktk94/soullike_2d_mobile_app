@@ -472,6 +472,9 @@ namespace SoulCraft.Factory
             go.AddComponent<SoulCraft.Enemy.EnemyHPBar>();
             go.AddComponent<SoulCraft.Enemy.EnemyHitReaction>();
 
+            // 적 모션
+            go.AddComponent<EnemyMotion>();
+
             return go;
         }
 
@@ -543,6 +546,9 @@ namespace SoulCraft.Factory
             go.AddComponent<SoulCraft.Player.PlayerCombat>();
             go.AddComponent<SoulCraft.Player.PlayerAnimator>();
             go.AddComponent<SoulCraft.Player.PlayerController>();
+
+            // 걷기 모션
+            go.AddComponent<SimpleMotion>();
 
             return go;
         }

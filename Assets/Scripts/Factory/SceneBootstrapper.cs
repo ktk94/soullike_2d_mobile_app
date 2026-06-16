@@ -407,6 +407,9 @@ namespace SoulCraft.Factory
                 var enemyBase = enemyGo.AddComponent<EnemyBase>();
                 SetPrivateField(enemyBase, "data", enemyData);
 
+                // 몬스터 다양화
+                MonsterVariety.ApplyVariety(enemyGo, type, 0);
+
                 // EnemyAI 추가
                 var aiType = System.Type.GetType("SoulCraft.Enemy.EnemyAI");
                 if (aiType != null)
