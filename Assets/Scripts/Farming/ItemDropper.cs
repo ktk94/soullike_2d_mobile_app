@@ -262,9 +262,6 @@ namespace SoulCraft.Farming
         public LootTable lootTable;
     }
 
-    /// <summary>
-    /// 아이템 획득 이벤트.
-    /// </summary>
     public struct ItemPickupEvent
     {
         public ItemData Item;

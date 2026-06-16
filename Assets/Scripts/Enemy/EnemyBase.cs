@@ -20,7 +20,7 @@ namespace SoulCraft.Enemy
 
     [RequireComponent(typeof(Rigidbody2D))]
     [RequireComponent(typeof(SpriteRenderer))]
-    public class EnemyBase : MonoBehaviour
+    public class EnemyBase : MonoBehaviour, IDamageable
     {
         // ── Inspector ───────────────────────────────────────
         [Header("Data")]
@@ -86,6 +86,14 @@ namespace SoulCraft.Enemy
         }
 
         // ── Damage / Death ──────────────────────────────────
+
+        /// <summary>
+        /// IDamageable 인터페이스 구현. 공격 원점 없이 데미지만 적용.
+        /// </summary>
+        public void TakeDamage(int damage, DamageType type)
+        {
+            TakeDamage(damage, (Vector2)transform.position + Vector2.left);
+        }
 
         /// <summary>
         /// 데미지를 적용하고 피격 반응을 실행한다.
@@ -229,14 +237,4 @@ namespace SoulCraft.Enemy
         }
     }
 
-    // ── Reward Event (EnemyBase 전용) ─────────────────────
-    /// <summary>
-    /// 적 처치 시 경험치/골드 보상 이벤트.
-    /// </summary>
-    public struct EnemyRewardEvent
-    {
-        public int Exp;
-        public int Gold;
-        public Vector2 Position;
-    }
 }

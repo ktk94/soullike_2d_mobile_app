@@ -1,0 +1,67 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!78 &1
+TagManager:
+  serializedVersion: 2
+  tags:
+  - Projectile
+  - Item
+  - Interactable
+  layers:
+  - Default
+  - TransparentFX
+  - Ignore Raycast
+  -
+  - Water
+  - UI
+  -
+  -
+  - Player
+  - Enemy
+  - PlayerProjectile
+  - EnemyProjectile
+  - Item
+  - Wall
+  - Trigger
+  -
+  -
+  -
+  -
+  -
+  -
+  -
+  -
+  -
+  -
+  -
+  -
+  -
+  -
+  -
+  -
+  -
+  m_SortingLayers:
+  - name: Default
+    uniqueID: 0
+    locked: 0
+  - name: Background
+    uniqueID: 1
+    locked: 0
+  - name: Floor
+    uniqueID: 2
+    locked: 0
+  - name: Decoration
+    uniqueID: 3
+    locked: 0
+  - name: Enemy
+    uniqueID: 4
+    locked: 0
+  - name: Player
+    uniqueID: 5
+    locked: 0
+  - name: Effect
+    uniqueID: 6
+    locked: 0
+  - name: UI
+    uniqueID: 7
+    locked: 0

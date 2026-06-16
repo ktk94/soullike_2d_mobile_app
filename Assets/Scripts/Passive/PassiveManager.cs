@@ -698,11 +698,4 @@ namespace SoulCraft.Passive
         }
     }
 
-    // ── Custom Event ────────────────────────────────────
-
-    public struct PassiveUnlockedEvent
-    {
-        public string PassiveId;
-        public int NewLevel;
-    }
 }

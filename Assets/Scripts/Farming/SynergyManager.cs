@@ -6,26 +6,6 @@ using SoulCraft.Combat;
 
 namespace SoulCraft.Farming
 {
-    // ── Events ──────────────────────────────────────────
-
-    /// <summary>
-    /// 시너지 활성화/비활성화 시 GameEventSystem을 통해 발행되는 이벤트.
-    /// </summary>
-    public struct SynergyActivatedEvent
-    {
-        public string SynergyId;
-        public string SynergyName;
-        public string UnlockMessage;
-        public string SkillId;
-    }
-
-    public struct SynergyDeactivatedEvent
-    {
-        public string SynergyId;
-        public string SynergyName;
-        public string SkillId;
-    }
-
     // ── Manager ─────────────────────────────────────────
 
     /// <summary>

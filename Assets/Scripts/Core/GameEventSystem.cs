@@ -99,6 +99,34 @@ namespace SoulCraft.Core
         public float ClearTime;
     }
 
+    public struct EnemyRewardEvent
+    {
+        public int Exp;
+        public int Gold;
+        public UnityEngine.Vector2 Position;
+    }
+
+    public struct SynergyActivatedEvent
+    {
+        public string SynergyId;
+        public string SynergyName;
+        public string UnlockMessage;
+        public string SkillId;
+    }
+
+    public struct SynergyDeactivatedEvent
+    {
+        public string SynergyId;
+        public string SynergyName;
+        public string SkillId;
+    }
+
+    public struct PassiveUnlockedEvent
+    {
+        public string PassiveId;
+        public int NewLevel;
+    }
+
     public enum DamageType
     {
         Physical,
