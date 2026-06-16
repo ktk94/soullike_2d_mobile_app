@@ -196,8 +196,13 @@ namespace SoulCraft.Factory
 
         private static void BuildHUD()
         {
-            var hudRoot = CreatePanel("HUD_Root", MainCanvas.transform, Vector2.zero, Vector2.one,
+            var hudRoot = CreatePanel("HUD_Root", MainCanvas.transform, Vector2.zero, Vector2.zero,
                 ColTransparent);
+            var hudRect = hudRoot.GetComponent<RectTransform>();
+            hudRect.anchorMin = Vector2.zero;
+            hudRect.anchorMax = Vector2.one;
+            hudRect.offsetMin = Vector2.zero;
+            hudRect.offsetMax = Vector2.zero;
 
             // ── 현재 층 표시 (좌상단, HP 위) ──
             FloorText = CreateText("FloorText", hudRoot.transform,
@@ -219,8 +224,10 @@ namespace SoulCraft.Factory
             CreateImage("HP_BG", hpGroup.transform, Vector2.zero, new Vector2(316, 28),
                 new Color(0.15f, 0.05f, 0.05f, 0.9f));
 
+            Image hpFill;
             HpSlider = CreateSlider("HP_Slider", hpGroup.transform,
-                Vector2.zero, new Vector2(312, 24), ColRed, out HpFillImage);
+                Vector2.zero, new Vector2(312, 24), ColRed, out hpFill);
+            HpFillImage = hpFill;
             HpSlider.value = 1f;
 
             HpText = CreateText("HP_Text", hpGroup.transform,
@@ -239,8 +246,10 @@ namespace SoulCraft.Factory
             CreateImage("Mana_BG", manaGroup.transform, Vector2.zero, new Vector2(236, 18),
                 new Color(0.05f, 0.05f, 0.15f, 0.9f));
 
+            Image manaFill;
             ManaSlider = CreateSlider("Mana_Slider", manaGroup.transform,
-                Vector2.zero, new Vector2(232, 16), ColBlue, out ManaFillImage);
+                Vector2.zero, new Vector2(232, 16), ColBlue, out manaFill);
+            ManaFillImage = manaFill;
             ManaSlider.value = 1f;
 
             // ── 골드 표시 (우상단) ──
@@ -452,13 +461,17 @@ namespace SoulCraft.Factory
                 ColBorderWhite, true);
 
             // 딜레이 HP 슬라이더 (주황, 뒤쪽)
+            Image delayFill;
             BossDelayHpSlider = CreateSlider("BossDelayHP", barArea.transform,
-                Vector2.zero, Vector2.zero, ColOrange, out BossDelayFillImage, true);
+                Vector2.zero, Vector2.zero, ColOrange, out delayFill, true);
+            BossDelayFillImage = delayFill;
             BossDelayHpSlider.value = 1f;
 
             // 실제 HP 슬라이더 (빨강, 앞쪽)
+            Image bossFill;
             BossHpSlider = CreateSlider("BossHP", barArea.transform,
-                Vector2.zero, Vector2.zero, ColRed, out BossHpFillImage, true);
+                Vector2.zero, Vector2.zero, ColRed, out bossFill, true);
+            BossHpFillImage = bossFill;
             BossHpSlider.value = 1f;
 
             // 페이즈 표시
@@ -1052,12 +1065,26 @@ namespace SoulCraft.Factory
         /// <summary>
         /// Image를 원형으로 만든다. (Knob 스프라이트를 사용)
         /// </summary>
+        private static Sprite _circleSprite;
         private static void MakeCircle(Image img)
         {
-            // Unity 내장 Knob 스프라이트 사용 (원형)
-            var knobSprite = Resources.GetBuiltinResource<Sprite>("UI/Skin/Knob.psd");
-            if (knobSprite != null)
-                img.sprite = knobSprite;
+            if (_circleSprite == null)
+            {
+                int size = 64;
+                var tex = new Texture2D(size, size, TextureFormat.RGBA32, false);
+                tex.filterMode = FilterMode.Bilinear;
+                float center = size / 2f;
+                float radius = center - 1;
+                for (int y = 0; y < size; y++)
+                    for (int x = 0; x < size; x++)
+                    {
+                        float dist = Vector2.Distance(new Vector2(x, y), new Vector2(center, center));
+                        tex.SetPixel(x, y, dist <= radius ? Color.white : Color.clear);
+                    }
+                tex.Apply();
+                _circleSprite = Sprite.Create(tex, new Rect(0, 0, size, size), new Vector2(0.5f, 0.5f));
+            }
+            img.sprite = _circleSprite;
         }
 
         /// <summary>

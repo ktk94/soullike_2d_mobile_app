@@ -435,25 +435,31 @@ namespace SoulCraft.Factory
             var go = new GameObject($"Enemy_{enemyType}");
             go.transform.position = (Vector3)position;
             go.tag = "Enemy";
+            go.layer = LayerMask.NameToLayer("Enemy") >= 0 ? LayerMask.NameToLayer("Enemy") : 0;
 
             var sr = go.AddComponent<SpriteRenderer>();
-            sr.sprite = GetWhiteSquare();
+            string spriteKey = $"enemy_{enemyType.ToLower()}";
+            var sprite = SpriteFactory.GetSprite(spriteKey);
+            sr.sprite = sprite != null ? sprite : GetWhiteSquare();
             sr.sortingOrder = 5;
+            sr.sortingLayerName = "Enemy";
 
-            switch (enemyType.ToLower())
+            if (sprite == null)
             {
-                case "slime":
-                    sr.color = new Color(0.2f, 0.8f, 0.3f, 1f); // 초록
-                    go.transform.localScale = new Vector3(0.8f, 0.6f, 1f);
-                    break;
-                case "skeleton":
-                    sr.color = new Color(0.85f, 0.85f, 0.8f, 1f); // 하얀
-                    go.transform.localScale = new Vector3(0.7f, 1.1f, 1f);
-                    break;
-                default:
-                    sr.color = new Color(0.6f, 0.2f, 0.2f, 1f); // 빨간
-                    go.transform.localScale = Vector3.one;
-                    break;
+                switch (enemyType.ToLower())
+                {
+                    case "slime":
+                        sr.color = new Color(0.2f, 0.8f, 0.3f, 1f);
+                        go.transform.localScale = new Vector3(0.8f, 0.6f, 1f);
+                        break;
+                    case "skeleton":
+                        sr.color = new Color(0.85f, 0.85f, 0.8f, 1f);
+                        go.transform.localScale = new Vector3(0.7f, 1.1f, 1f);
+                        break;
+                    default:
+                        sr.color = new Color(0.6f, 0.2f, 0.2f, 1f);
+                        break;
+                }
             }
 
             var rb = go.AddComponent<Rigidbody2D>();
@@ -462,9 +468,6 @@ namespace SoulCraft.Factory
 
             var col = go.AddComponent<CircleCollider2D>();
             col.radius = 0.35f;
-
-            // EnemyBase는 EnemyData가 필요하므로 여기서는 부착하지 않음.
-            // SceneBootstrapper에서 EnemyData를 런타임 생성 후 부착할 수 있음.
 
             return go;
         }
@@ -477,12 +480,15 @@ namespace SoulCraft.Factory
             var go = new GameObject("Boss_Placeholder");
             go.transform.position = (Vector3)position;
             go.tag = "Enemy";
+            go.layer = LayerMask.NameToLayer("Enemy") >= 0 ? LayerMask.NameToLayer("Enemy") : 0;
 
             var sr = go.AddComponent<SpriteRenderer>();
-            sr.sprite = GetWhiteSquare();
-            sr.color = new Color(0.7f, 0.1f, 0.1f, 1f); // 진한 빨강
+            var sprite = SpriteFactory.GetSprite("boss_elder_grove");
+            sr.sprite = sprite != null ? sprite : GetWhiteSquare();
+            if (sprite == null) sr.color = new Color(0.7f, 0.1f, 0.1f, 1f);
             sr.sortingOrder = 5;
-            go.transform.localScale = new Vector3(2f, 2f, 1f);
+            sr.sortingLayerName = "Enemy";
+            go.transform.localScale = new Vector3(1.5f, 1.5f, 1f);
 
             var rb = go.AddComponent<Rigidbody2D>();
             rb.gravityScale = 0f;
@@ -507,13 +513,15 @@ namespace SoulCraft.Factory
             var go = new GameObject("Player");
             go.transform.position = (Vector3)position;
             go.tag = "Player";
+            go.layer = LayerMask.NameToLayer("Player") >= 0 ? LayerMask.NameToLayer("Player") : 0;
 
-            // 스프라이트
+            // SpriteFactory 픽셀아트 사용
             var sr = go.AddComponent<SpriteRenderer>();
-            sr.sprite = GetWhiteSquare();
-            sr.color = new Color(0.3f, 0.6f, 1f, 1f); // 파란색
+            var sprite = SpriteFactory.GetSprite("player_idle");
+            sr.sprite = sprite != null ? sprite : GetWhiteSquare();
+            if (sprite == null) sr.color = new Color(0.3f, 0.6f, 1f, 1f);
             sr.sortingOrder = 10;
-            go.transform.localScale = new Vector3(0.7f, 1f, 1f);
+            sr.sortingLayerName = "Player";
 
             // Rigidbody2D
             var rb = go.AddComponent<Rigidbody2D>();
@@ -521,11 +529,17 @@ namespace SoulCraft.Factory
             rb.freezeRotation = true;
 
             // Collider
-            var col = go.AddComponent<CircleCollider2D>();
-            col.radius = 0.3f;
+            var col = go.AddComponent<BoxCollider2D>();
+            col.size = new Vector2(0.5f, 0.7f);
 
             // Animator (PlayerAnimator가 RequireComponent로 요구)
             go.AddComponent<Animator>();
+
+            // 필수 컴포넌트 추가
+            go.AddComponent<SoulCraft.Player.PlayerStats>();
+            go.AddComponent<SoulCraft.Player.PlayerCombat>();
+            go.AddComponent<SoulCraft.Player.PlayerAnimator>();
+            go.AddComponent<SoulCraft.Player.PlayerController>();
 
             return go;
         }

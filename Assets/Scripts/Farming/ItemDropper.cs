@@ -205,12 +205,11 @@ namespace SoulCraft.Farming
             if (sr != null)
                 sr.color = glowColor;
 
-            // 자식에 글로우 파티클 또는 Light2D가 있으면 색상 전달
-            var light = obj.GetComponentInChildren<UnityEngine.Rendering.Universal.Light2D>();
-            if (light != null)
+            // 글로우 효과: SpriteRenderer 색상으로 대체 (URP Light2D 미사용)
+            var childSr = obj.GetComponentInChildren<SpriteRenderer>();
+            if (childSr != null && childSr != sr)
             {
-                light.color = glowColor;
-                light.intensity = rarity >= Rarity.Epic ? 2f : 1f;
+                childSr.color = glowColor * (rarity >= Rarity.Epic ? 2f : 1f);
             }
         }
 

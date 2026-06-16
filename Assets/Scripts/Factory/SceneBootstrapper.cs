@@ -3,6 +3,7 @@ using UnityEngine;
 using SoulCraft.Core;
 using SoulCraft.Player;
 using SoulCraft.Combat;
+using SoulCraft.Enemy;
 using SoulCraft.Farming;
 using SoulCraft.UI;
 using SoulCraft.World;

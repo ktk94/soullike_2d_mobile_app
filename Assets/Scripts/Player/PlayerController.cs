@@ -56,15 +56,20 @@ namespace SoulCraft.Player
         void Awake()
         {
             _rb = GetComponent<Rigidbody2D>();
+            if (_spriteRenderer == null)
+                _spriteRenderer = GetComponentInChildren<SpriteRenderer>();
+            if (_rb != null)
+            {
+                _rb.gravityScale = 0f;
+                _rb.freezeRotation = true;
+            }
+        }
+
+        void Start()
+        {
             _stats = GetComponent<PlayerStats>();
             _combat = GetComponent<PlayerCombat>();
             _playerAnimator = GetComponent<PlayerAnimator>();
-
-            if (_spriteRenderer == null)
-                _spriteRenderer = GetComponentInChildren<SpriteRenderer>();
-
-            _rb.gravityScale = 0f;
-            _rb.freezeRotation = true;
         }
 
         void Update()
@@ -165,21 +170,24 @@ namespace SoulCraft.Player
 
         private void HandleMovement()
         {
+            float speed = _stats != null ? _stats.Speed : 5f;
             if (_moveInput.sqrMagnitude > 0.01f)
             {
                 ChangeState(PlayerState.Moving);
 
                 Vector2 moveDir = _moveInput.normalized;
-                _rb.linearVelocity = moveDir * (_stats.Speed * _moveSpeedMultiplier);
+                _rb.linearVelocity = moveDir * (speed * _moveSpeedMultiplier);
 
                 UpdateFacingDirection(moveDir);
-                _playerAnimator.SetMovement(moveDir, _rb.linearVelocity.magnitude);
+                if (_playerAnimator != null)
+                    _playerAnimator.SetMovement(moveDir, _rb.linearVelocity.magnitude);
             }
             else
             {
                 ChangeState(PlayerState.Idle);
                 _rb.linearVelocity = Vector2.zero;
-                _playerAnimator.SetMovement(Vector2.zero, 0f);
+                if (_playerAnimator != null)
+                    _playerAnimator.SetMovement(Vector2.zero, 0f);
             }
         }
 
@@ -246,7 +254,7 @@ namespace SoulCraft.Player
                 CurrentState == PlayerState.Hit)
                 return;
 
-            _combat.TryAttack();
+            if (_combat != null) _combat.TryAttack();
         }
 
         // --- Timers ---

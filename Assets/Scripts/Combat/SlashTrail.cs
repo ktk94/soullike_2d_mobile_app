@@ -68,7 +68,7 @@ namespace SoulCraft.Combat
         {
             _trail = GetComponent<TrailRenderer>();
             _trail.emitting = false;
-            _trail.clear = true;
+            _trail.Clear();
 
             if (_weaponTip == null)
                 _weaponTip = transform;
