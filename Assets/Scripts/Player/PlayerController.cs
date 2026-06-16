@@ -1,5 +1,4 @@
 using UnityEngine;
-using UnityEngine.InputSystem;
 using SoulCraft.Core;
 
 namespace SoulCraft.Player
@@ -39,7 +38,6 @@ namespace SoulCraft.Player
         private PlayerAnimator _playerAnimator;
 
         // Input
-        private PlayerInputActions _inputActions;
         private Vector2 _moveInput;
 
         // State
@@ -67,31 +65,12 @@ namespace SoulCraft.Player
 
             _rb.gravityScale = 0f;
             _rb.freezeRotation = true;
-
-            _inputActions = new PlayerInputActions();
-        }
-
-        void OnEnable()
-        {
-            _inputActions.Enable();
-            _inputActions.Gameplay.Move.performed += OnMovePerformed;
-            _inputActions.Gameplay.Move.canceled += OnMoveCanceled;
-            _inputActions.Gameplay.Dash.performed += OnDashPerformed;
-            _inputActions.Gameplay.Attack.performed += OnAttackPerformed;
-        }
-
-        void OnDisable()
-        {
-            _inputActions.Gameplay.Move.performed -= OnMovePerformed;
-            _inputActions.Gameplay.Move.canceled -= OnMoveCanceled;
-            _inputActions.Gameplay.Dash.performed -= OnDashPerformed;
-            _inputActions.Gameplay.Attack.performed -= OnAttackPerformed;
-            _inputActions.Disable();
         }
 
         void Update()
         {
             UpdateTimers();
+            ReadKeyboardInput();
         }
 
         void FixedUpdate()
@@ -113,46 +92,38 @@ namespace SoulCraft.Player
             }
         }
 
-        // --- Input Callbacks ---
+        // --- Keyboard Input (Editor/PC 테스트용) ---
 
-        private void OnMovePerformed(InputAction.CallbackContext ctx)
+        private void ReadKeyboardInput()
         {
-            _moveInput = ctx.ReadValue<Vector2>();
+            if (CurrentState == PlayerState.Dead) return;
+
+            float h = Input.GetAxisRaw("Horizontal");
+            float v = Input.GetAxisRaw("Vertical");
+            Vector2 kbInput = new Vector2(h, v);
+            if (kbInput.sqrMagnitude > 0.01f)
+                _moveInput = kbInput.normalized;
+            else if (!_externalInputActive)
+                _moveInput = Vector2.zero;
+
+            if (Input.GetKeyDown(KeyCode.Space))
+                TryDash();
+            if (Input.GetKeyDown(KeyCode.Z) || Input.GetMouseButtonDown(0))
+                TryAttack();
         }
 
-        private void OnMoveCanceled(InputAction.CallbackContext ctx)
-        {
-            _moveInput = Vector2.zero;
-        }
+        private bool _externalInputActive;
 
-        private void OnDashPerformed(InputAction.CallbackContext ctx)
-        {
-            TryDash();
-        }
+        // --- Public API (가상 조이스틱 / MobileInputUI에서 호출) ---
 
-        private void OnAttackPerformed(InputAction.CallbackContext ctx)
-        {
-            TryAttack();
-        }
-
-        // --- Public API (for virtual joystick) ---
-
-        /// <summary>
-        /// 외부(가상 조이스틱 등)에서 이동 입력을 전달할 때 사용.
-        /// </summary>
         public void SetMoveInput(Vector2 input)
         {
             _moveInput = input;
+            _externalInputActive = input.sqrMagnitude > 0.01f;
         }
 
-        /// <summary>
-        /// 외부에서 대시 트리거.
-        /// </summary>
         public void TriggerDash() => TryDash();
 
-        /// <summary>
-        /// 외부에서 공격 트리거.
-        /// </summary>
         public void TriggerAttack() => TryAttack();
 
         // --- State Management ---
@@ -163,18 +134,12 @@ namespace SoulCraft.Player
             CurrentState = newState;
         }
 
-        /// <summary>
-        /// PlayerCombat에서 공격 종료 시 호출.
-        /// </summary>
         public void OnAttackEnd()
         {
             if (CurrentState == PlayerState.Attacking)
                 ChangeState(_moveInput.sqrMagnitude > 0.01f ? PlayerState.Moving : PlayerState.Idle);
         }
 
-        /// <summary>
-        /// 피격 처리. PlayerStats.TakeDamage에서 호출.
-        /// </summary>
         public void OnHit()
         {
             if (IsInvincible || CurrentState == PlayerState.Dead) return;
@@ -182,11 +147,9 @@ namespace SoulCraft.Player
             ChangeState(PlayerState.Hit);
             _playerAnimator.PlayHit();
 
-            // 피격 후 짧은 무적
             IsInvincible = true;
             _iFrameTimer = _iFrameDuration;
 
-            // 일정 시간 후 복귀 (Animator Event 또는 타이머)
             Invoke(nameof(RecoverFromHit), 0.3f);
         }
 
@@ -226,7 +189,6 @@ namespace SoulCraft.Player
 
             FacingDirection = direction.normalized;
 
-            // 좌우 방향 전환
             if (_spriteRenderer != null)
             {
                 if (direction.x < -0.01f)
@@ -255,7 +217,6 @@ namespace SoulCraft.Player
             _dashTimer = _dashDuration;
             _dashCooldownTimer = _dashCooldown;
 
-            // 대시 중 무적
             IsInvincible = true;
             _iFrameTimer = _iFrameDuration;
 
@@ -271,7 +232,6 @@ namespace SoulCraft.Player
             }
             else
             {
-                // 대시 종료
                 _rb.linearVelocity = Vector2.zero;
                 ChangeState(_moveInput.sqrMagnitude > 0.01f ? PlayerState.Moving : PlayerState.Idle);
             }
