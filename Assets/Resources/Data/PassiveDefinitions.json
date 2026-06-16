@@ -1,0 +1,323 @@
+{
+  "passives": [
+    {
+      "passiveId": "offense_01_sharp_strike",
+      "passiveName": "날카로운 일격",
+      "description": "날카로운 전투 감각으로 적에게 더 강력한 타격을 가한다.",
+      "category": "Offense",
+      "maxLevel": 5,
+      "effects": [
+        { "statType": "Attack", "value": 0.02, "isPercentage": true },
+        { "statType": "Attack", "value": 0.04, "isPercentage": true },
+        { "statType": "Attack", "value": 0.06, "isPercentage": true },
+        { "statType": "Attack", "value": 0.08, "isPercentage": true },
+        { "statType": "Attack", "value": 0.10, "isPercentage": true }
+      ],
+      "goldCost": [100, 300, 600, 1200, 2500],
+      "prerequisites": []
+    },
+    {
+      "passiveId": "offense_02_critical_eye",
+      "passiveName": "치명적 안목",
+      "description": "적의 약점을 꿰뚫어 보는 눈. 치명타 확률이 증가한다.",
+      "category": "Offense",
+      "maxLevel": 5,
+      "effects": [
+        { "statType": "CritRate", "value": 0.03, "isPercentage": true },
+        { "statType": "CritRate", "value": 0.06, "isPercentage": true },
+        { "statType": "CritRate", "value": 0.09, "isPercentage": true },
+        { "statType": "CritRate", "value": 0.12, "isPercentage": true },
+        { "statType": "CritRate", "value": 0.15, "isPercentage": true }
+      ],
+      "goldCost": [150, 400, 800, 1500, 3000],
+      "prerequisites": [
+        { "passiveId": "offense_01_sharp_strike", "requiredLevel": 2 }
+      ]
+    },
+    {
+      "passiveId": "offense_03_elemental_affinity",
+      "passiveName": "원소 친화",
+      "description": "원소의 힘에 대한 깊은 이해. 속성 데미지가 증가한다.",
+      "category": "Offense",
+      "maxLevel": 5,
+      "effects": [
+        { "statType": "ElementalDamageBonus", "value": 0.05, "isPercentage": true },
+        { "statType": "ElementalDamageBonus", "value": 0.10, "isPercentage": true },
+        { "statType": "ElementalDamageBonus", "value": 0.15, "isPercentage": true },
+        { "statType": "ElementalDamageBonus", "value": 0.20, "isPercentage": true },
+        { "statType": "ElementalDamageBonus", "value": 0.25, "isPercentage": true }
+      ],
+      "goldCost": [200, 500, 1000, 2000, 4000],
+      "prerequisites": [
+        { "passiveId": "offense_02_critical_eye", "requiredLevel": 1 }
+      ]
+    },
+    {
+      "passiveId": "offense_04_chain_hit",
+      "passiveName": "연속 타격",
+      "description": "연속 공격의 달인. 콤보 입력 윈도우가 넓어진다.",
+      "category": "Offense",
+      "maxLevel": 5,
+      "effects": [
+        { "statType": "ComboWindowExtend", "value": 0.3, "isPercentage": false },
+        { "statType": "ComboWindowExtend", "value": 0.6, "isPercentage": false },
+        { "statType": "ComboWindowExtend", "value": 0.9, "isPercentage": false },
+        { "statType": "ComboWindowExtend", "value": 1.2, "isPercentage": false },
+        { "statType": "ComboWindowExtend", "value": 1.5, "isPercentage": false }
+      ],
+      "goldCost": [200, 500, 1000, 2000, 4000],
+      "prerequisites": [
+        { "passiveId": "offense_03_elemental_affinity", "requiredLevel": 1 }
+      ]
+    },
+    {
+      "passiveId": "offense_05_executioner",
+      "passiveName": "처형자",
+      "description": "경직 상태의 적에게 치명적인 추가 데미지를 가한다.",
+      "category": "Offense",
+      "maxLevel": 5,
+      "effects": [
+        { "statType": "StaggerDamageBonus", "value": 0.10, "isPercentage": true },
+        { "statType": "StaggerDamageBonus", "value": 0.20, "isPercentage": true },
+        { "statType": "StaggerDamageBonus", "value": 0.30, "isPercentage": true },
+        { "statType": "StaggerDamageBonus", "value": 0.40, "isPercentage": true },
+        { "statType": "StaggerDamageBonus", "value": 0.50, "isPercentage": true }
+      ],
+      "goldCost": [300, 700, 1400, 2800, 5500],
+      "prerequisites": [
+        { "passiveId": "offense_04_chain_hit", "requiredLevel": 1 }
+      ]
+    },
+
+    {
+      "passiveId": "defense_01_tough_body",
+      "passiveName": "강인한 육체",
+      "description": "단련된 육체로 더 많은 생명력을 보유한다.",
+      "category": "Defense",
+      "maxLevel": 5,
+      "effects": [
+        { "statType": "MaxHp", "value": 0.05, "isPercentage": true },
+        { "statType": "MaxHp", "value": 0.10, "isPercentage": true },
+        { "statType": "MaxHp", "value": 0.15, "isPercentage": true },
+        { "statType": "MaxHp", "value": 0.20, "isPercentage": true },
+        { "statType": "MaxHp", "value": 0.25, "isPercentage": true }
+      ],
+      "goldCost": [100, 300, 600, 1200, 2500],
+      "prerequisites": []
+    },
+    {
+      "passiveId": "defense_02_iron_wall",
+      "passiveName": "철벽 방어",
+      "description": "철벽처럼 단단한 방어력으로 적의 공격을 막아낸다.",
+      "category": "Defense",
+      "maxLevel": 5,
+      "effects": [
+        { "statType": "Defense", "value": 0.03, "isPercentage": true },
+        { "statType": "Defense", "value": 0.06, "isPercentage": true },
+        { "statType": "Defense", "value": 0.09, "isPercentage": true },
+        { "statType": "Defense", "value": 0.12, "isPercentage": true },
+        { "statType": "Defense", "value": 0.15, "isPercentage": true }
+      ],
+      "goldCost": [150, 400, 800, 1500, 3000],
+      "prerequisites": [
+        { "passiveId": "defense_01_tough_body", "requiredLevel": 2 }
+      ]
+    },
+    {
+      "passiveId": "defense_03_vampiric_instinct",
+      "passiveName": "흡혈 본능",
+      "description": "적에게 가한 데미지의 일부를 생명력으로 흡수한다.",
+      "category": "Defense",
+      "maxLevel": 5,
+      "effects": [
+        { "statType": "LifeSteal", "value": 0.01, "isPercentage": true },
+        { "statType": "LifeSteal", "value": 0.02, "isPercentage": true },
+        { "statType": "LifeSteal", "value": 0.03, "isPercentage": true },
+        { "statType": "LifeSteal", "value": 0.04, "isPercentage": true },
+        { "statType": "LifeSteal", "value": 0.05, "isPercentage": true }
+      ],
+      "goldCost": [200, 500, 1000, 2000, 4000],
+      "prerequisites": [
+        { "passiveId": "defense_02_iron_wall", "requiredLevel": 1 }
+      ]
+    },
+    {
+      "passiveId": "defense_04_damage_resist",
+      "passiveName": "데미지 저항",
+      "description": "몸을 통해 느끼는 고통에 둔감해진다. 받는 피해가 감소한다.",
+      "category": "Defense",
+      "maxLevel": 5,
+      "effects": [
+        { "statType": "DamageReduction", "value": 0.02, "isPercentage": true },
+        { "statType": "DamageReduction", "value": 0.04, "isPercentage": true },
+        { "statType": "DamageReduction", "value": 0.06, "isPercentage": true },
+        { "statType": "DamageReduction", "value": 0.08, "isPercentage": true },
+        { "statType": "DamageReduction", "value": 0.10, "isPercentage": true }
+      ],
+      "goldCost": [250, 600, 1200, 2400, 5000],
+      "prerequisites": [
+        { "passiveId": "defense_03_vampiric_instinct", "requiredLevel": 1 }
+      ]
+    },
+    {
+      "passiveId": "defense_05_quick_dodge",
+      "passiveName": "빠른 회피",
+      "description": "재빠른 몸놀림으로 대시 쿨다운이 감소한다.",
+      "category": "Defense",
+      "maxLevel": 5,
+      "effects": [
+        { "statType": "DodgeCooldown", "value": 0.05, "isPercentage": true },
+        { "statType": "DodgeCooldown", "value": 0.10, "isPercentage": true },
+        { "statType": "DodgeCooldown", "value": 0.15, "isPercentage": true },
+        { "statType": "DodgeCooldown", "value": 0.20, "isPercentage": true },
+        { "statType": "DodgeCooldown", "value": 0.25, "isPercentage": true }
+      ],
+      "goldCost": [200, 500, 1000, 2000, 4000],
+      "prerequisites": [
+        { "passiveId": "defense_04_damage_resist", "requiredLevel": 1 }
+      ]
+    },
+
+    {
+      "passiveId": "utility_01_agile_step",
+      "passiveName": "민첩한 발걸음",
+      "description": "가볍고 빠른 발걸음으로 이동 속도가 증가한다.",
+      "category": "Utility",
+      "maxLevel": 5,
+      "effects": [
+        { "statType": "Speed", "value": 0.03, "isPercentage": true },
+        { "statType": "Speed", "value": 0.06, "isPercentage": true },
+        { "statType": "Speed", "value": 0.09, "isPercentage": true },
+        { "statType": "Speed", "value": 0.12, "isPercentage": true },
+        { "statType": "Speed", "value": 0.15, "isPercentage": true }
+      ],
+      "goldCost": [100, 300, 600, 1200, 2500],
+      "prerequisites": []
+    },
+    {
+      "passiveId": "utility_02_skill_master",
+      "passiveName": "스킬 달인",
+      "description": "스킬 사용에 능숙해져 쿨다운이 감소한다.",
+      "category": "Utility",
+      "maxLevel": 5,
+      "effects": [
+        { "statType": "SkillCooldownReduction", "value": 0.03, "isPercentage": true },
+        { "statType": "SkillCooldownReduction", "value": 0.06, "isPercentage": true },
+        { "statType": "SkillCooldownReduction", "value": 0.09, "isPercentage": true },
+        { "statType": "SkillCooldownReduction", "value": 0.12, "isPercentage": true },
+        { "statType": "SkillCooldownReduction", "value": 0.15, "isPercentage": true }
+      ],
+      "goldCost": [150, 400, 800, 1500, 3000],
+      "prerequisites": [
+        { "passiveId": "utility_01_agile_step", "requiredLevel": 2 }
+      ]
+    },
+    {
+      "passiveId": "utility_03_battle_experience",
+      "passiveName": "전투 경험",
+      "description": "풍부한 전투 경험으로 더 많은 경험치를 획득한다.",
+      "category": "Utility",
+      "maxLevel": 5,
+      "effects": [
+        { "statType": "ExpBonus", "value": 0.05, "isPercentage": true },
+        { "statType": "ExpBonus", "value": 0.10, "isPercentage": true },
+        { "statType": "ExpBonus", "value": 0.15, "isPercentage": true },
+        { "statType": "ExpBonus", "value": 0.20, "isPercentage": true },
+        { "statType": "ExpBonus", "value": 0.25, "isPercentage": true }
+      ],
+      "goldCost": [200, 500, 1000, 2000, 4000],
+      "prerequisites": [
+        { "passiveId": "utility_02_skill_master", "requiredLevel": 1 }
+      ]
+    },
+    {
+      "passiveId": "utility_04_treasure_hunter",
+      "passiveName": "보물 사냥꾼",
+      "description": "보물을 찾아내는 본능. 골드 획득량이 증가한다.",
+      "category": "Utility",
+      "maxLevel": 5,
+      "effects": [
+        { "statType": "GoldBonus", "value": 0.05, "isPercentage": true },
+        { "statType": "GoldBonus", "value": 0.10, "isPercentage": true },
+        { "statType": "GoldBonus", "value": 0.15, "isPercentage": true },
+        { "statType": "GoldBonus", "value": 0.20, "isPercentage": true },
+        { "statType": "GoldBonus", "value": 0.25, "isPercentage": true }
+      ],
+      "goldCost": [200, 500, 1000, 2000, 4000],
+      "prerequisites": [
+        { "passiveId": "utility_03_battle_experience", "requiredLevel": 1 }
+      ]
+    },
+
+    {
+      "passiveId": "farming_01_collector",
+      "passiveName": "수집가",
+      "description": "아이템을 수집하는 데 타고난 재능. 드롭률이 증가한다.",
+      "category": "Farming",
+      "maxLevel": 5,
+      "effects": [
+        { "statType": "GoldBonus", "value": 0.05, "isPercentage": true },
+        { "statType": "GoldBonus", "value": 0.10, "isPercentage": true },
+        { "statType": "GoldBonus", "value": 0.15, "isPercentage": true },
+        { "statType": "GoldBonus", "value": 0.20, "isPercentage": true },
+        { "statType": "GoldBonus", "value": 0.25, "isPercentage": true }
+      ],
+      "goldCost": [100, 300, 600, 1200, 2500],
+      "prerequisites": []
+    },
+    {
+      "passiveId": "farming_02_lucky",
+      "passiveName": "행운아",
+      "description": "타고난 행운. 레어 이상 등급 아이템의 드롭률이 증가한다.",
+      "category": "Farming",
+      "maxLevel": 5,
+      "effects": [
+        { "statType": "CritRate", "value": 0.03, "isPercentage": true },
+        { "statType": "CritRate", "value": 0.06, "isPercentage": true },
+        { "statType": "CritRate", "value": 0.09, "isPercentage": true },
+        { "statType": "CritRate", "value": 0.12, "isPercentage": true },
+        { "statType": "CritRate", "value": 0.15, "isPercentage": true }
+      ],
+      "goldCost": [150, 400, 800, 1500, 3000],
+      "prerequisites": [
+        { "passiveId": "farming_01_collector", "requiredLevel": 2 }
+      ]
+    },
+    {
+      "passiveId": "farming_03_alchemist",
+      "passiveName": "연금술사",
+      "description": "연금술의 지식으로 장비 강화 성공률이 증가한다.",
+      "category": "Farming",
+      "maxLevel": 5,
+      "effects": [
+        { "statType": "CritDamage", "value": 0.05, "isPercentage": true },
+        { "statType": "CritDamage", "value": 0.10, "isPercentage": true },
+        { "statType": "CritDamage", "value": 0.15, "isPercentage": true },
+        { "statType": "CritDamage", "value": 0.20, "isPercentage": true },
+        { "statType": "CritDamage", "value": 0.25, "isPercentage": true }
+      ],
+      "goldCost": [200, 500, 1000, 2000, 4000],
+      "prerequisites": [
+        { "passiveId": "farming_02_lucky", "requiredLevel": 1 }
+      ]
+    },
+    {
+      "passiveId": "farming_04_synergy_master",
+      "passiveName": "시너지 마스터",
+      "description": "시너지 스킬의 위력을 극대화한다.",
+      "category": "Farming",
+      "maxLevel": 5,
+      "effects": [
+        { "statType": "Attack", "value": 0.05, "isPercentage": true },
+        { "statType": "Attack", "value": 0.10, "isPercentage": true },
+        { "statType": "Attack", "value": 0.15, "isPercentage": true },
+        { "statType": "Attack", "value": 0.20, "isPercentage": true },
+        { "statType": "Attack", "value": 0.25, "isPercentage": true }
+      ],
+      "goldCost": [250, 600, 1200, 2400, 5000],
+      "prerequisites": [
+        { "passiveId": "farming_03_alchemist", "requiredLevel": 1 }
+      ]
+    }
+  ]
+}

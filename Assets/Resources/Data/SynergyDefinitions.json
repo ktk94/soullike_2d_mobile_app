@@ -1,0 +1,163 @@
+{
+  "synergies": [
+    {
+      "id": "synergy_fire_storm",
+      "name": "화염 폭풍",
+      "description": "화염의 정수와 바람의 결정이 만나 거대한 불폭풍을 일으킨다. 넓은 범위의 적에게 화염 피해를 입힌다.",
+      "requiredItems": [
+        { "itemId": "mat_fire_essence", "quantity": 3 },
+        { "itemId": "mat_wind_crystal", "quantity": 3 }
+      ],
+      "resultSkillId": "skill_fire_storm",
+      "type": "OffensiveCombo",
+      "bonusEffect": "화염 피해 20% 증가, 3초간 적 화상 상태이상 부여"
+    },
+    {
+      "id": "synergy_lava_eruption",
+      "name": "용암 분출",
+      "description": "화염의 정수와 대지의 파편이 결합하여 땅 속에서 용암이 분출한다. 주변 적에게 막대한 피해를 준다.",
+      "requiredItems": [
+        { "itemId": "mat_fire_essence", "quantity": 3 },
+        { "itemId": "mat_earth_fragment", "quantity": 3 }
+      ],
+      "resultSkillId": "skill_lava_eruption",
+      "type": "OffensiveCombo",
+      "bonusEffect": "지면에 용암 지대 생성, 5초간 위의 적에게 지속 피해"
+    },
+    {
+      "id": "synergy_thunder_storm",
+      "name": "뇌빙격",
+      "description": "빙결의 핵과 번개의 조각이 융합하여 얼어붙은 번개를 내리친다. 적을 동결시킨 뒤 번개로 산산조각낸다.",
+      "requiredItems": [
+        { "itemId": "mat_ice_core", "quantity": 3 },
+        { "itemId": "mat_lightning_shard", "quantity": 3 }
+      ],
+      "resultSkillId": "skill_thunder_storm",
+      "type": "OffensiveCombo",
+      "bonusEffect": "2초간 적 동결, 동결 상태 적에게 번개 피해 50% 추가"
+    },
+    {
+      "id": "synergy_gale_bolt",
+      "name": "질풍뇌신",
+      "description": "번개의 조각과 바람의 결정이 합쳐져 번개를 머금은 질풍을 일으킨다. 직선 범위의 적을 관통한다.",
+      "requiredItems": [
+        { "itemId": "mat_lightning_shard", "quantity": 3 },
+        { "itemId": "mat_wind_crystal", "quantity": 3 }
+      ],
+      "resultSkillId": "skill_gale_bolt",
+      "type": "OffensiveCombo",
+      "bonusEffect": "관통 공격, 적중한 적 수만큼 피해 10% 증가"
+    },
+    {
+      "id": "synergy_eclipse",
+      "name": "일식",
+      "description": "어둠의 정수와 성스러운 결정이 충돌하여 빛과 어둠이 뒤섞인 일식을 일으킨다. 모든 속성 저항을 무시한다.",
+      "requiredItems": [
+        { "itemId": "mat_dark_essence", "quantity": 5 },
+        { "itemId": "mat_holy_crystal", "quantity": 5 }
+      ],
+      "resultSkillId": "skill_eclipse",
+      "type": "OffensiveCombo",
+      "bonusEffect": "모든 속성 저항 무시, 암흑+성스러움 혼합 피해"
+    },
+    {
+      "id": "synergy_frozen_wall",
+      "name": "빙하의 벽",
+      "description": "대지의 파편, 바람의 결정, 빙결의 핵 세 가지가 모여 거대한 얼음 벽을 세운다. 전방의 모든 투사체와 적을 막는다.",
+      "requiredItems": [
+        { "itemId": "mat_earth_fragment", "quantity": 3 },
+        { "itemId": "mat_wind_crystal", "quantity": 3 },
+        { "itemId": "mat_ice_core", "quantity": 3 }
+      ],
+      "resultSkillId": "skill_frozen_wall",
+      "type": "DefensiveCombo",
+      "bonusEffect": "8초간 빙하 벽 유지, 벽에 닿은 적 감속 50%"
+    },
+    {
+      "id": "synergy_elemental_burst",
+      "name": "원소 폭발",
+      "description": "화염의 정수, 빙결의 핵, 번개의 조각이 하나로 융합하여 원소의 폭발을 일으킨다. 화면 전체에 막대한 피해를 준다.",
+      "requiredItems": [
+        { "itemId": "mat_fire_essence", "quantity": 5 },
+        { "itemId": "mat_ice_core", "quantity": 5 },
+        { "itemId": "mat_lightning_shard", "quantity": 5 }
+      ],
+      "resultSkillId": "skill_elemental_burst",
+      "type": "OffensiveCombo",
+      "bonusEffect": "전체 화면 범위 공격, 화염·빙결·번개 속성 동시 적용"
+    },
+    {
+      "id": "synergy_holy_shield",
+      "name": "성스러운 방벽",
+      "description": "성스러운 결정과 대지의 파편이 결합하여 신성한 방벽을 세운다. 일정 시간 동안 피해를 크게 감소시킨다.",
+      "requiredItems": [
+        { "itemId": "mat_holy_crystal", "quantity": 3 },
+        { "itemId": "mat_earth_fragment", "quantity": 3 }
+      ],
+      "resultSkillId": "skill_holy_shield",
+      "type": "DefensiveCombo",
+      "bonusEffect": "6초간 받는 피해 60% 감소, 암흑 속성 피해 면역"
+    },
+    {
+      "id": "synergy_shadow_step",
+      "name": "그림자 도약",
+      "description": "어둠의 정수와 바람의 결정이 결합하여 그림자 속으로 순간이동한다. 이동 중 무적이며 도착 지점의 적에게 피해를 준다.",
+      "requiredItems": [
+        { "itemId": "mat_dark_essence", "quantity": 3 },
+        { "itemId": "mat_wind_crystal", "quantity": 3 }
+      ],
+      "resultSkillId": "skill_shadow_step",
+      "type": "UtilityCombo",
+      "bonusEffect": "순간이동 거리 비례 피해 증가, 0.5초 무적 부여"
+    },
+    {
+      "id": "synergy_flame_rebirth",
+      "name": "불사조의 부활",
+      "description": "화염의 정수와 성스러운 결정이 만나 불사조의 힘을 발현한다. HP가 0이 되면 자동 부활하며 주변 적에게 피해를 준다.",
+      "requiredItems": [
+        { "itemId": "mat_fire_essence", "quantity": 5 },
+        { "itemId": "mat_holy_crystal", "quantity": 5 }
+      ],
+      "resultSkillId": "skill_flame_rebirth",
+      "type": "DefensiveCombo",
+      "bonusEffect": "스테이지당 1회 자동 부활, 부활 시 HP 30% 회복 + 주변 화염 폭발"
+    },
+    {
+      "id": "synergy_dragons_breath",
+      "name": "용의 숨결",
+      "description": "고대 용의 비늘과 화염의 정수가 결합하여 용의 숨결을 재현한다. 전방 넓은 범위에 지속적인 화염을 뿜는다.",
+      "requiredItems": [
+        { "itemId": "boss_dragon_scale", "quantity": 1 },
+        { "itemId": "mat_fire_essence", "quantity": 5 }
+      ],
+      "resultSkillId": "skill_dragons_breath",
+      "type": "OffensiveCombo",
+      "bonusEffect": "3초간 전방 부채꼴 지속 화염, 매 틱 화상 중첩"
+    },
+    {
+      "id": "synergy_abyssal_void",
+      "name": "심연의 공허",
+      "description": "심연의 눈동자와 어둠의 정수가 결합하여 블랙홀을 생성한다. 주변 적을 빨아들여 한 점에 모은 뒤 폭발시킨다.",
+      "requiredItems": [
+        { "itemId": "boss_abyss_eye", "quantity": 1 },
+        { "itemId": "mat_dark_essence", "quantity": 5 }
+      ],
+      "resultSkillId": "skill_abyssal_void",
+      "type": "OffensiveCombo",
+      "bonusEffect": "2초간 블랙홀 흡인, 이후 암흑 속성 대폭발"
+    },
+    {
+      "id": "synergy_titans_wrath",
+      "name": "거인의 분노",
+      "description": "거인의 심장과 대지의 파편, 번개의 조각이 결합하여 대지를 뒤흔드는 일격을 날린다.",
+      "requiredItems": [
+        { "itemId": "boss_titan_heart", "quantity": 1 },
+        { "itemId": "mat_earth_fragment", "quantity": 5 },
+        { "itemId": "mat_lightning_shard", "quantity": 3 }
+      ],
+      "resultSkillId": "skill_titans_wrath",
+      "type": "OffensiveCombo",
+      "bonusEffect": "지진 효과, 넓은 범위 적 기절 2초 + 물리 피해 200%"
+    }
+  ]
+}

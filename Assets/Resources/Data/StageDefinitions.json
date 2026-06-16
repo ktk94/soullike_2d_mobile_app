@@ -1,0 +1,319 @@
+{
+  "stages": [
+    {
+      "id": "stage_forgotten_forest",
+      "name": "잊혀진 숲",
+      "nameEn": "Forgotten Grove",
+      "description": "한때 정령들이 살던 신성한 숲. 심연의 오염이 스며들어 뒤틀린 괴물들이 배회한다. 모험의 시작점.",
+      "difficulty": 2,
+      "floorCount": 2,
+      "recommendedLevel": 1,
+      "element": "Physical",
+      "bossName": "엘더 그로브",
+      "bossId": "boss_elder_grove",
+      "unlockConditionStageId": "",
+      "bgmClipName": "bgm_forgotten_forest",
+      "enemyTypes": [
+        {
+          "enemyId": "enemy_corrupted_spirit",
+          "name": "오염된 정령",
+          "hp": 40,
+          "attack": 6,
+          "defense": 2,
+          "expReward": 10,
+          "goldReward": 5
+        },
+        {
+          "enemyId": "enemy_poison_mushroom",
+          "name": "독버섯 졸개",
+          "hp": 30,
+          "attack": 8,
+          "defense": 1,
+          "expReward": 8,
+          "goldReward": 4
+        },
+        {
+          "enemyId": "enemy_thorn_warrior",
+          "name": "가시덩굴 전사",
+          "hp": 55,
+          "attack": 10,
+          "defense": 4,
+          "expReward": 15,
+          "goldReward": 7
+        },
+        {
+          "enemyId": "enemy_rotted_golem",
+          "name": "부패한 나무 골렘",
+          "hp": 80,
+          "attack": 7,
+          "defense": 8,
+          "expReward": 20,
+          "goldReward": 10
+        }
+      ],
+      "bossData": {
+        "enemyId": "boss_elder_grove",
+        "name": "엘더 그로브",
+        "hp": 500,
+        "attack": 18,
+        "defense": 8,
+        "expReward": 200,
+        "goldReward": 100,
+        "phases": 2,
+        "acquiredSkillId": "skill_thorn_vine"
+      }
+    },
+    {
+      "id": "stage_crimson_mines",
+      "name": "붉은 광산",
+      "nameEn": "Crimson Mines",
+      "description": "용암과 붉은 광석으로 가득한 지하 세계. 화염 속성의 강력한 적들이 도사리고 있다.",
+      "difficulty": 4,
+      "floorCount": 3,
+      "recommendedLevel": 8,
+      "element": "Fire",
+      "bossName": "이그니스",
+      "bossId": "boss_ignis",
+      "unlockConditionStageId": "stage_forgotten_forest",
+      "bgmClipName": "bgm_crimson_mines",
+      "enemyTypes": [
+        {
+          "enemyId": "enemy_fire_imp",
+          "name": "화염 임프",
+          "hp": 60,
+          "attack": 14,
+          "defense": 3,
+          "expReward": 18,
+          "goldReward": 9
+        },
+        {
+          "enemyId": "enemy_lava_slime",
+          "name": "용암 슬라임",
+          "hp": 50,
+          "attack": 12,
+          "defense": 6,
+          "expReward": 15,
+          "goldReward": 8
+        },
+        {
+          "enemyId": "enemy_flame_dwarf",
+          "name": "불꽃 드워프 망령",
+          "hp": 85,
+          "attack": 16,
+          "defense": 7,
+          "expReward": 25,
+          "goldReward": 12
+        },
+        {
+          "enemyId": "enemy_magma_turtle",
+          "name": "마그마 거북",
+          "hp": 120,
+          "attack": 10,
+          "defense": 15,
+          "expReward": 30,
+          "goldReward": 15
+        }
+      ],
+      "bossData": {
+        "enemyId": "boss_ignis",
+        "name": "이그니스",
+        "hp": 900,
+        "attack": 28,
+        "defense": 12,
+        "expReward": 400,
+        "goldReward": 200,
+        "phases": 2,
+        "acquiredSkillId": "skill_flame_burst"
+      }
+    },
+    {
+      "id": "stage_frozen_citadel",
+      "name": "얼어붙은 성채",
+      "nameEn": "Frozen Citadel",
+      "description": "빙결의 저주가 내린 고대의 성채. 얼어붙은 망령과 얼음 괴물이 성을 지킨다.",
+      "difficulty": 6,
+      "floorCount": 3,
+      "recommendedLevel": 15,
+      "element": "Ice",
+      "bossName": "글라시아",
+      "bossId": "boss_glacia",
+      "unlockConditionStageId": "stage_crimson_mines",
+      "bgmClipName": "bgm_frozen_citadel",
+      "enemyTypes": [
+        {
+          "enemyId": "enemy_ice_knight",
+          "name": "얼음 기사 망령",
+          "hp": 100,
+          "attack": 20,
+          "defense": 12,
+          "expReward": 30,
+          "goldReward": 15
+        },
+        {
+          "enemyId": "enemy_frost_spirit",
+          "name": "서리 정령",
+          "hp": 70,
+          "attack": 22,
+          "defense": 5,
+          "expReward": 25,
+          "goldReward": 12
+        },
+        {
+          "enemyId": "enemy_frozen_wolf",
+          "name": "빙결 늑대",
+          "hp": 80,
+          "attack": 18,
+          "defense": 8,
+          "expReward": 22,
+          "goldReward": 11
+        },
+        {
+          "enemyId": "enemy_blizzard_elemental",
+          "name": "눈보라 원소",
+          "hp": 130,
+          "attack": 24,
+          "defense": 10,
+          "expReward": 35,
+          "goldReward": 18
+        }
+      ],
+      "bossData": {
+        "enemyId": "boss_glacia",
+        "name": "글라시아",
+        "hp": 1400,
+        "attack": 35,
+        "defense": 18,
+        "expReward": 600,
+        "goldReward": 300,
+        "phases": 3,
+        "acquiredSkillId": "skill_frost_wave"
+      }
+    },
+    {
+      "id": "stage_thunder_spire",
+      "name": "천둥 첨탑",
+      "nameEn": "Thunder Spire",
+      "description": "구름을 뚫고 솟은 고대의 탑. 번개를 두른 강력한 적들이 각 층을 지키고 있다.",
+      "difficulty": 8,
+      "floorCount": 4,
+      "recommendedLevel": 22,
+      "element": "Lightning",
+      "bossName": "볼타르",
+      "bossId": "boss_voltar",
+      "unlockConditionStageId": "stage_frozen_citadel",
+      "bgmClipName": "bgm_thunder_spire",
+      "enemyTypes": [
+        {
+          "enemyId": "enemy_thunder_harpy",
+          "name": "번개 하피",
+          "hp": 110,
+          "attack": 26,
+          "defense": 8,
+          "expReward": 38,
+          "goldReward": 19
+        },
+        {
+          "enemyId": "enemy_electric_golem",
+          "name": "전격 골렘",
+          "hp": 180,
+          "attack": 22,
+          "defense": 20,
+          "expReward": 45,
+          "goldReward": 22
+        },
+        {
+          "enemyId": "enemy_storm_spirit",
+          "name": "뇌운 정령",
+          "hp": 95,
+          "attack": 30,
+          "defense": 6,
+          "expReward": 35,
+          "goldReward": 17
+        },
+        {
+          "enemyId": "enemy_spark_wizard",
+          "name": "스파크 위자드",
+          "hp": 90,
+          "attack": 35,
+          "defense": 5,
+          "expReward": 40,
+          "goldReward": 20
+        }
+      ],
+      "bossData": {
+        "enemyId": "boss_voltar",
+        "name": "볼타르",
+        "hp": 2000,
+        "attack": 45,
+        "defense": 22,
+        "expReward": 900,
+        "goldReward": 450,
+        "phases": 3,
+        "acquiredSkillId": "skill_thunder_strike"
+      }
+    },
+    {
+      "id": "stage_abyss_throne",
+      "name": "심연의 왕좌",
+      "nameEn": "Abyss Throne",
+      "description": "빛이 닿지 않는 세계의 가장 깊은 곳. 모든 재앙의 근원지이자, 최종 결전의 무대.",
+      "difficulty": 10,
+      "floorCount": 5,
+      "recommendedLevel": 30,
+      "element": "Dark",
+      "bossName": "말로크",
+      "bossId": "boss_malrok",
+      "unlockConditionStageId": "stage_thunder_spire",
+      "bgmClipName": "bgm_abyss_throne",
+      "enemyTypes": [
+        {
+          "enemyId": "enemy_abyss_follower",
+          "name": "심연 추종자",
+          "hp": 150,
+          "attack": 32,
+          "defense": 14,
+          "expReward": 50,
+          "goldReward": 25
+        },
+        {
+          "enemyId": "enemy_dark_shadow",
+          "name": "어둠 그림자",
+          "hp": 120,
+          "attack": 38,
+          "defense": 8,
+          "expReward": 45,
+          "goldReward": 22
+        },
+        {
+          "enemyId": "enemy_void_knight",
+          "name": "공허의 기사",
+          "hp": 200,
+          "attack": 35,
+          "defense": 18,
+          "expReward": 55,
+          "goldReward": 28
+        },
+        {
+          "enemyId": "enemy_dimension_distortion",
+          "name": "차원 왜곡체",
+          "hp": 170,
+          "attack": 40,
+          "defense": 12,
+          "expReward": 60,
+          "goldReward": 30
+        }
+      ],
+      "bossData": {
+        "enemyId": "boss_malrok",
+        "name": "말로크",
+        "hp": 3500,
+        "attack": 60,
+        "defense": 30,
+        "expReward": 1500,
+        "goldReward": 800,
+        "phases": 4,
+        "acquiredSkillId": "skill_abyss_embrace"
+      }
+    }
+  ]
+}
