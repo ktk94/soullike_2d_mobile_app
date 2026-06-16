@@ -118,11 +118,21 @@ namespace SoulCraft.Player
 
         private void ShowSlashEffect(int step)
         {
+            // AttackVisualizer가 있으면 우선 사용
+            Vector2 facing = _controller != null ? _controller.FacingDirection : Vector2.right;
+            Vector2 effectPos = (Vector2)transform.position + facing.normalized * 0.6f;
+
+            var visualizer = GetComponent<SoulCraft.Combat.AttackVisualizer>();
+            if (visualizer != null)
+            {
+                visualizer.ShowComboEffect(step, facing, effectPos);
+            }
+
+            // 기본 슬래시 비주얼도 표시 (폴백 겸 보조 이펙트)
             if (_slashVisual == null) return;
             _slashVisual.SetActive(true);
 
             // 공격 방향에 따라 회전
-            Vector2 facing = _controller != null ? _controller.FacingDirection : Vector2.right;
             float angle = Mathf.Atan2(facing.y, facing.x) * Mathf.Rad2Deg;
             _slashVisual.transform.localRotation = Quaternion.Euler(0, 0, angle - 90 + step * 60);
             _slashVisual.transform.localPosition = (Vector3)(facing.normalized * 0.6f);

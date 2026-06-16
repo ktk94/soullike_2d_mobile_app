@@ -104,45 +104,56 @@ namespace SoulCraft.Factory
         {
             if (!_generateTestStage) return;
 
-            Debug.Log("[SceneBootstrapper] 테스트 스테이지 생성 시작...");
+            Debug.Log("[SceneBootstrapper] 던전 스테이지 생성 시작...");
 
-            // 1. 테스트 스테이지 생성
-            var stage = SimpleRoom.GenerateTestStage(
-                out Vector2 playerSpawnPos,
-                out List<Vector2> enemySpawnPositions,
-                out List<Vector2> doorPositions);
+            // 1. DungeonFlowManager 생성 및 던전 시작
+            var dungeonGo = new GameObject("DungeonManager");
+            var dungeon = dungeonGo.AddComponent<DungeonFlowManager>();
 
-            // 2. 플레이어 배치
+            // 2. 플레이어 배치 (DungeonFlowManager의 스폰 위치 사용)
+            Vector2 playerSpawnPos = dungeon.GetPlayerSpawnPosition();
             SpawnPlayer(playerSpawnPos);
 
-            // 3. 적 배치
-            SpawnEnemies(enemySpawnPositions);
+            // 3. 플레이어에 AttackVisualizer 추가
+            if (_playerGo != null)
+            {
+                _playerGo.AddComponent<SoulCraft.Combat.AttackVisualizer>();
+            }
 
-            // 4. ObjectPool에 투사체, 이펙트, 데미지 팝업 등록
+            // 4. DungeonFlowManager에 플레이어 참조 설정
+            if (_playerGo != null)
+            {
+                dungeon.SetPlayerTransform(_playerGo.transform);
+            }
+
+            // 5. 던전 시작 (스테이지 1부터)
+            dungeon.StartDungeon(1);
+
+            // 6. ObjectPool에 투사체, 이펙트, 데미지 팝업 등록
             RegisterObjectPools();
 
-            // 5. 카메라 타겟 설정
+            // 7. 카메라 타겟 설정
             if (_cameraController != null && _playerGo != null)
             {
                 _cameraController.SetTarget(_playerGo.transform);
             }
 
-            // 6. MobileInputUI -> PlayerController 연결
+            // 8. MobileInputUI -> PlayerController 연결
             ConnectMobileInput();
 
-            // 7. GameManager 상태를 Playing으로
+            // 9. GameManager 상태를 Playing으로
             if (GameManager.Instance != null)
             {
                 GameManager.Instance.ChangeState(GameState.Playing);
             }
 
-            // 8. HUD 초기 갱신
+            // 10. HUD 초기 갱신
             if (HUDManager.Instance != null)
             {
                 HUDManager.Instance.RefreshAllUI();
             }
 
-            Debug.Log("[SceneBootstrapper] 테스트 스테이지 생성 완료.");
+            Debug.Log("[SceneBootstrapper] 던전 스테이지 생성 완료.");
         }
 
         // ================================================================
@@ -358,6 +369,9 @@ namespace SoulCraft.Factory
 
             // Equipment
             _playerGo.AddComponent<Equipment>();
+
+            // LevelUpSystem
+            _playerGo.AddComponent<SoulCraft.Player.LevelUpSystem>();
 
             Debug.Log($"[SceneBootstrapper] 플레이어 생성: {position}");
         }

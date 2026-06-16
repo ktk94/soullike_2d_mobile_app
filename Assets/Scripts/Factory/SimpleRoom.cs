@@ -469,6 +469,9 @@ namespace SoulCraft.Factory
             var col = go.AddComponent<CircleCollider2D>();
             col.radius = 0.35f;
 
+            go.AddComponent<SoulCraft.Enemy.EnemyHPBar>();
+            go.AddComponent<SoulCraft.Enemy.EnemyHitReaction>();
+
             return go;
         }
 
