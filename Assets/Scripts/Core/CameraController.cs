@@ -43,11 +43,12 @@ namespace SoulCraft.Core
             // Shake
             if (_shakeTimer > 0)
             {
-                _shakeTimer -= Time.deltaTime;
+                _shakeTimer -= Time.unscaledDeltaTime;
                 _shakeOffset = Random.insideUnitCircle * _shakeIntensity;
-                transform.position += _shakeOffset;
+                transform.position += (Vector3)_shakeOffset;
 
-                _shakeIntensity = Mathf.Lerp(_shakeIntensity, 0, Time.deltaTime * 10f);
+                _shakeIntensity = Mathf.Lerp(_shakeIntensity, 0, Time.unscaledDeltaTime * 20f);
+                if (_shakeTimer <= 0) _shakeIntensity = 0;
             }
         }
 

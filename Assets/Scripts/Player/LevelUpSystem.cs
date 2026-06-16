@@ -106,7 +106,6 @@ namespace SoulCraft.Player
 
         private void OnEnemyDeath(EnemyDeathEvent evt)
         {
-            // EnemyId에서 기본 타입 추출하여 보상 결정
             string enemyId = evt.EnemyId;
             if (string.IsNullOrEmpty(enemyId)) return;
 
@@ -114,7 +113,54 @@ namespace SoulCraft.Player
             if (expReward > 0 && _stats != null)
             {
                 _stats.AddExp(expReward);
+                ShowExpPopup(evt.Position, expReward);
             }
+        }
+
+        private void ShowExpPopup(Vector2 position, int exp)
+        {
+            var popupGo = new GameObject("ExpPopup");
+            popupGo.transform.position = (Vector3)position + Vector3.up * 0.5f;
+
+            var canvas = popupGo.AddComponent<Canvas>();
+            canvas.renderMode = RenderMode.WorldSpace;
+            canvas.sortingOrder = 100;
+            var rt = popupGo.GetComponent<RectTransform>();
+            rt.sizeDelta = new Vector2(2f, 0.5f);
+            rt.localScale = Vector3.one * 0.02f;
+
+            var textGo = new GameObject("Text");
+            textGo.transform.SetParent(popupGo.transform, false);
+            var tmp = textGo.AddComponent<TextMeshProUGUI>();
+            tmp.text = $"+{exp} EXP";
+            tmp.fontSize = 28;
+            tmp.color = new Color(0.4f, 1f, 0.4f, 1f);
+            tmp.alignment = TextAlignmentOptions.Center;
+            tmp.fontStyle = FontStyles.Bold;
+            var textRt = textGo.GetComponent<RectTransform>();
+            textRt.sizeDelta = new Vector2(200, 50);
+
+            StartCoroutine(AnimateExpPopup(popupGo));
+        }
+
+        private IEnumerator AnimateExpPopup(GameObject popup)
+        {
+            float duration = 1.2f;
+            float elapsed = 0f;
+            Vector3 startPos = popup.transform.position;
+            var texts = popup.GetComponentsInChildren<TextMeshProUGUI>();
+
+            while (elapsed < duration)
+            {
+                elapsed += Time.deltaTime;
+                float t = elapsed / duration;
+                popup.transform.position = startPos + Vector3.up * (t * 1.2f);
+                float alpha = t < 0.3f ? 1f : Mathf.Lerp(1f, 0f, (t - 0.3f) / 0.7f);
+                foreach (var txt in texts)
+                    txt.color = new Color(txt.color.r, txt.color.g, txt.color.b, alpha);
+                yield return null;
+            }
+            Destroy(popup);
         }
 
         private void OnEnemyReward(EnemyRewardEvent evt)

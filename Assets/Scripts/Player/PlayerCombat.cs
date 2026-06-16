@@ -381,7 +381,7 @@ namespace SoulCraft.Player
         private void ApplyScreenShake()
         {
             if (CameraController.Instance != null)
-                CameraController.Instance.Shake(_shakeIntensity, _shakeDuration);
+                CameraController.Instance.Shake(0.08f, 0.08f);
         }
 
         // --- Gizmos ---

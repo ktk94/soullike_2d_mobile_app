@@ -116,6 +116,11 @@ namespace SoulCraft.Enemy
             // 넉백
             ApplyKnockback(hitSource);
 
+            // EnemyHitReaction 호출 (피격 모션)
+            var hitReaction = GetComponent<EnemyHitReaction>();
+            if (hitReaction != null)
+                hitReaction.PlayHitReaction(effectiveDamage, false, hitSource);
+
             if (CurrentHp <= 0)
             {
                 CurrentHp = 0;
